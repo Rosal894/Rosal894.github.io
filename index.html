@@ -634,6 +634,15 @@ body {
       </div>
     </div>
 
+    <!-- BUKTI TIMESTAMP -->
+    <div id="bukti_timestamp" style="margin:16px 0;background:rgba(201,168,76,.08);border:1.5px solid rgba(201,168,76,.4);border-radius:12px;padding:14px 18px;text-align:center">
+      <div style="font-size:.7rem;color:#a09070;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px">🕐 Bukti Waktu Pengambilan THR</div>
+      <div id="bukti_tgl" style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold-light);font-weight:600;letter-spacing:.04em"></div>
+      <div id="bukti_jam" style="font-family:'Playfair Display',serif;font-size:1.5rem;color:#fff;font-weight:700;margin:2px 0"></div>
+      <div style="font-size:.68rem;color:#7a6a50;margin-top:4px">ID Sesi: <span id="bukti_id" style="color:#a09070;font-family:monospace"></span></div>
+      <div style="font-size:.65rem;color:#7a6a50;margin-top:6px">⚠️ Timestamp ini tercatat otomatis — satu kali per perangkat</div>
+    </div>
+
     <div id="final_msg" style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#d4c9b0;font-style:italic;margin-bottom:20px;line-height:1.6"></div>
 
     <div style="background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.25);border-radius:8px;padding:12px 16px;font-size:.78rem;color:#e87070;line-height:1.6">
@@ -883,6 +892,17 @@ function submitRekening() {
   document.getElementById('final_norek').textContent = norek;
   document.getElementById('final_bank').textContent = bank;
   document.getElementById('final_nominal2').textContent = formatRp(window._pendingNominal);
+
+  // === BUKTI TIMESTAMP ===
+  const now = new Date();
+  const bulanNama = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const hariNama = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const tgl = `${hariNama[now.getDay()]}, ${now.getDate()} ${bulanNama[now.getMonth()]} ${now.getFullYear()}`;
+  const jam = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0') + ' WIB';
+  const sesiId = Math.random().toString(36).substr(2,8).toUpperCase();
+  document.getElementById('bukti_tgl').textContent = tgl;
+  document.getElementById('bukti_jam').textContent = jam;
+  document.getElementById('bukti_id').textContent = sesiId;
   const msgs = {
     500:  `Semoga 500 perak ini jadi berkah ya, ${window._pendingNama}! 🌙`,
     1000: `Seribu berkah menyertai ${window._pendingNama}! 🌙`,
@@ -925,6 +945,148 @@ function launchConfetti() {
     setTimeout(()=>el.remove(), 5000);
   }
 }
+</script>
+
+<!-- ══════════════════════════════════
+     YOUTUBE BACKGROUND MUSIC PLAYER
+     Selamat Hari Lebaran - Ismail Marzuki
+══════════════════════════════════ -->
+
+<!-- YouTube iframe tersembunyi -->
+<div id="yt-player-wrap" style="position:fixed;bottom:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;pointer-events:none;">
+  <iframe id="yt-iframe"
+    width="1" height="1"
+    src="https://www.youtube.com/embed/r7ND3RNASNI?autoplay=1&loop=1&playlist=r7ND3RNASNI&controls=0&mute=0&enablejsapi=1"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+</div>
+
+<style>
+  /* Tombol musik floating */
+  #music-fab {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9999;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1a4a3a, #2d6b54);
+    border: 2px solid #c9a84c;
+    box-shadow: 0 0 20px rgba(201,168,76,.4), 0 6px 20px rgba(0,0,0,.5);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    gap: 1px;
+    transition: transform .3s, box-shadow .3s;
+    animation: fabIn 1s ease forwards 2s;
+    opacity: 0;
+  }
+  @keyframes fabIn {
+    from{opacity:0;transform:scale(0) rotate(-180deg)}
+    to{opacity:1;transform:scale(1) rotate(0deg)}
+  }
+  #music-fab:hover { transform: scale(1.1); box-shadow: 0 0 30px rgba(201,168,76,.7), 0 8px 30px rgba(0,0,0,.5); }
+  #music-fab .fab-icon { font-size: 1.4rem; line-height:1; }
+  #music-fab .fab-label { font-size: .38rem; letter-spacing:.08em; color: #c9a84c; text-transform:uppercase; }
+
+  /* Pulse saat playing */
+  #music-fab.playing { animation: fabPulse 2.5s ease-in-out infinite; }
+  @keyframes fabPulse {
+    0%,100%{box-shadow:0 0 20px rgba(201,168,76,.4),0 6px 20px rgba(0,0,0,.5)}
+    50%{box-shadow:0 0 40px rgba(201,168,76,.8),0 0 80px rgba(201,168,76,.3),0 6px 20px rgba(0,0,0,.5)}
+  }
+
+  /* Equalizer bars saat playing */
+  .eq { display:none; gap:2px; align-items:flex-end; height:16px; }
+  .eq span { display:block; width:3px; background:#c9a84c; border-radius:2px; }
+  #music-fab.playing .eq { display:flex; }
+  #music-fab.playing .fab-icon-static { display:none; }
+  #music-fab.playing .eq span:nth-child(1){animation:eq1 .6s ease-in-out infinite alternate}
+  #music-fab.playing .eq span:nth-child(2){animation:eq1 .4s ease-in-out infinite alternate .1s}
+  #music-fab.playing .eq span:nth-child(3){animation:eq1 .8s ease-in-out infinite alternate .05s}
+  #music-fab.playing .eq span:nth-child(4){animation:eq1 .5s ease-in-out infinite alternate .15s}
+  @keyframes eq1{from{height:3px}to{height:16px}}
+
+  /* Toast notif */
+  #music-toast {
+    position:fixed;bottom:96px;right:28px;z-index:9999;
+    background:linear-gradient(135deg,#1a3028ee,#0e1e16ee);
+    border:1px solid rgba(201,168,76,.4);
+    border-radius:10px;
+    padding:10px 16px;
+    color:#e8dcc8;
+    font-family:'Poppins',sans-serif;
+    font-size:.78rem;
+    white-space:nowrap;
+    opacity:0;pointer-events:none;
+    transform:translateY(6px);
+    transition:opacity .4s,transform .4s;
+    box-shadow:0 4px 20px rgba(0,0,0,.4);
+    max-width:220px;
+    white-space:normal;
+    text-align:center;
+  }
+  #music-toast.show{opacity:1;transform:translateY(0)}
+</style>
+
+<!-- Floating button -->
+<button id="music-fab" onclick="toggleYTMusic()" title="Putar/Pause Musik">
+  <span class="fab-icon fab-icon-static">🎵</span>
+  <div class="eq">
+    <span style="height:4px"></span>
+    <span style="height:10px"></span>
+    <span style="height:6px"></span>
+    <span style="height:14px"></span>
+  </div>
+  <span class="fab-label">Musik</span>
+</button>
+<div id="music-toast">♪ Selamat Hari Lebaran<br><small style="color:#c9a84c">- Ismail Marzuki</small></div>
+
+<script>
+(function(){
+  let isPlaying = false;
+  let started = false;
+  const iframe = document.getElementById('yt-iframe');
+  const fab = document.getElementById('music-fab');
+  const toast = document.getElementById('music-toast');
+
+  function showToast(msg, duration=3000) {
+    toast.innerHTML = msg;
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'), duration);
+  }
+
+  // Auto-play hint setelah 3 detik
+  setTimeout(()=>{
+    showToast('🎵 Tap untuk memutar<br><small style="color:#c9a84c">Selamat Hari Lebaran</small>', 4000);
+  }, 3500);
+
+  window.toggleYTMusic = function() {
+    if(!started) {
+      // Pertama kali: reload iframe dengan autoplay
+      iframe.src = iframe.src.replace('autoplay=0','autoplay=1');
+      started = true;
+      isPlaying = true;
+      fab.classList.add('playing');
+      showToast('▶ ♪ Selamat Hari Lebaran<br><small style="color:#c9a84c">- Ismail Marzuki</small>');
+      return;
+    }
+    // Toggle via postMessage ke YouTube
+    if(isPlaying) {
+      iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}','*');
+      isPlaying = false;
+      fab.classList.remove('playing');
+      showToast('⏸ Musik dijeda');
+    } else {
+      iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}','*');
+      isPlaying = true;
+      fab.classList.add('playing');
+      showToast('▶ ♪ Selamat Hari Lebaran');
+    }
+  };
+})();
 </script>
 </body>
 </html>
