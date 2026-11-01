@@ -1,17 +1,20 @@
-# KisahNada Windows — studio 0.3
+# KisahNada Windows 0.3.1 — perbaikan runtime nyanyian
 
-[Unduh installer Windows x64, 75.5 MB](https://github.com/Rosal894/Rosal894.github.io/raw/refs/heads/kisahnada-download-0.3.0/KisahNada-Setup.exe)
+[Unduh installer Windows x64, 85.4 MB](https://github.com/Rosal894/Rosal894.github.io/raw/refs/heads/kisahnada-download-0.3.1/KisahNada-Setup.exe)
 
-Studio dengan editor Cerita/Lirik/Foto/Remix dan hasil lagu satu halaman, pencarian/filter Disukai, playback/unduhan, dan tema gelap/terang. Alur cerita meninjau lirik sebelum membuat lagu jika AI lirik dan model nyanyian tersedia. Bug handler ganda yang dapat membuat demo saat klik alur AI sudah diperbaiki.
+Versi 0.3.1 memperbaiki ketidakcocokan Python pada pemasang ACE-Step. Source ACE-Step memerlukan Python >=3.11,<3.13; worker versi 0.2/0.3 dibuat dengan Python 3.13. Paket ini menyertakan Python 3.12 terpisah untuk nyanyian, sementara aplikasi utama tetap Python 3.13. Tidak perlu memasang Python atau WSL manual.
 
-- [Panduan pemasangan](PANDUAN.md)
+- [Panduan](PANDUAN.md)
 - [Source aplikasi](KisahNada-source.zip)
 - [SHA256](KisahNada-Setup.exe.sha256)
-- [Pratinjau gelap](studio-dark.png) · [Pratinjau terang](studio-light.png)
+- [Audit dependency Windows](Windows-dependency-audit.json)
+- [Audit runtime CPU bersih](Singing-runtime-audit.json)
 
-Model ACE-Step diunduh terpisah melalui aplikasi. Lirik Groq memerlukan key dan konfirmasi paket gratis; template dilabeli bukan AI. My Voice belum tersedia. Nyanyian Windows dan kualitas setara Song.ai belum terbukti. Song.ai tidak dapat diakses dari jaringan pengembangan; desain mengikuti contoh layar pengguna dan pola studio musik, dengan identitas KisahNada. Screenshot menampilkan empty state, bukan lagu pengguna palsu.
+Model nyanyian tetap diunduh terpisah melalui tombol Pasang mesin nyanyian AI setelah konfirmasi. Kesiapan Windows memerlukan marker akhir import CPU dan checkpoint terverifikasi; instalasi parsial tidak dianggap siap. Runtime lama dan karya tidak ditimpa.
 
-Paket masih versi uji, belum ditandatangani atau diuji langsung pada Windows asli. Tes browser memakai proyek audio nyata dan mock untuk jalur AI; itu bukan inferensi nyanyian. Runtime/lisensi/provenance disertakan dalam installer dan source. Tidak ada API key atau media pribadi.
+37 tes backend serta regresi browser lulus. Dependency dipasang pada lingkungan Linux Python 3.12 bersih dan API CPU berhasil diimpor; 22 dependency langsung memiliki wheel Windows yang sesuai. Pemeriksaan ini bukan bukti inferensi nyanyian atau keberhasilan pada Windows asli. Nyanyian Windows dan kualitas setara Song.ai belum teruji; My Voice belum didukung. Installer unsigned.
 
-Source commit: 634b2123ea54393aabab4c071fc9bc2b55f1ee50
-SHA256 installer: 0b0c15a58a13d91405cfa910b7c00003ee4ca78ad8f53e6c86e27e8cae4c5363
+Tampilan studio 0.3, pencarian/filter koleksi, tinjau lirik dan tema gelap/terang tetap tersedia. AI lirik Groq memerlukan key/paket gratis terkonfirmasi; template dilabeli bukan AI. Tidak ada API key atau media pribadi di paket/source.
+
+Source commit: 95ee8414843070dec316ba00ed6a72c46cade44a
+SHA256 installer: 7c0890f0a7bdebe22ad96cf86715d1a3975c18300df9f2a19f3dbf1b3b71908b
