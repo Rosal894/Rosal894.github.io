@@ -1,0 +1,11 @@
+{
+  "isolated_linux_python": "3.12.14",
+  "system_site_packages": false,
+  "cpu_api_imports": "passed in clean environment",
+  "source_commit": "ca1e85fe9430179831e6bc6be790c332190a3866",
+  "worker_python_windows": "3.12.10",
+  "upstream_requires_python": ">=3.11,<3.13",
+  "model_weights_installed": false,
+  "actual_singing_inference": "not_run",
+  "windows_execution": "not_verified"
+}
