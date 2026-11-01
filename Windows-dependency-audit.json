@@ -1,0 +1,118 @@
+{
+  "worker_python": "3.12.10",
+  "upstream_python_requirement": ">=3.11,<3.13",
+  "direct_dependencies": [
+    {
+      "package": "transformers==4.57.6",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "diffusers==0.37.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "accelerate==1.12.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "soundfile==0.13.1",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "loguru==0.7.3",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "einops==0.8.2",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "fastapi==0.162.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "uvicorn==0.54.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "python-multipart==0.0.33",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "diskcache==5.6.3",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "numba==0.68.1",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "vector-quantize-pytorch==1.32.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "scipy==1.18.1",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "toml==0.10.2",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "peft==0.21.2",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "lycoris-lora==4.1.3",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "lightning==2.6.6",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "tensorboard==2.21.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "pytorch-wavelets==1.3.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "pywavelets==1.10.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "typer-slim==0.24.0",
+      "python_supported": true,
+      "windows_wheel": true
+    },
+    {
+      "package": "setuptools==71.1.0",
+      "python_supported": true,
+      "windows_wheel": true
+    }
+  ],
+  "actual_windows_execution": false,
+  "model_inference_tested": false
+}
